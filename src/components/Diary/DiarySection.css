@@ -1,0 +1,119 @@
+.diary-section {
+  padding: clamp(5rem, 12vw, 9rem) 0;
+  position: relative;
+}
+
+.diary-radial {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.diary-section--1 .diary-radial {
+  background: radial-gradient(ellipse 70% 40% at 80% 50%, rgba(212,175,55,0.04) 0%, transparent 60%);
+}
+.diary-section--2 .diary-radial {
+  background: radial-gradient(ellipse 70% 40% at 20% 50%, rgba(212,175,55,0.04) 0%, transparent 60%);
+}
+.diary-section--3 .diary-radial {
+  background: radial-gradient(ellipse 70% 40% at 50% 30%, rgba(212,175,55,0.04) 0%, transparent 60%);
+}
+
+/* ── Header ─────────────────────────── */
+.diary-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.diary-num {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 700;
+  color: rgba(212,175,55,0.08);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.diary-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.diary-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-mid) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.diary-subtitle {
+  font-family: var(--font-script);
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.diary-header-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+  margin-top: 0.5rem;
+}
+
+/* ── Book wrap ───────────────────────── */
+.diary-book-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Transition bridge ─────────────── */
+.diary-transition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: clamp(3rem, 8vw, 6rem) 1rem;
+  text-align: center;
+}
+
+.transition-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-style: italic;
+  color: var(--text-dim);
+  max-width: 480px;
+  line-height: 1.7;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.transition-text.visible { opacity: 1; }
+
+.transition-ornament {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0.4;
+}
+
+.t-line {
+  display: block;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+}
+
+.t-star {
+  color: var(--gold-mid);
+  font-size: 0.85rem;
+}

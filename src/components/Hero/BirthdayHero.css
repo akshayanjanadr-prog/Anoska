@@ -1,0 +1,242 @@
+.hero-section {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 1rem 4rem;
+}
+
+.hero-radial {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(212,175,55,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 80%,  rgba(212,175,55,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 70%,  rgba(201,162,39,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* ── Label ─────────────────────────── */
+.hero-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-sans);
+  font-size: clamp(0.6rem, 2vw, 0.75rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-mid);
+}
+
+.label-line {
+  display: block;
+  width: clamp(30px, 8vw, 60px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+}
+
+/* ── ANOSKA Name Block ─────────────────────────────────────── */
+.hero-name-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  perspective: 800px;
+}
+
+.hero-name-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.18) 0%,
+    rgba(212, 175, 55, 0.06) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: name-glow-pulse 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes name-glow-pulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.hero-name-letters {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: clamp(4px, 2vw, 16px);
+  align-items: center;
+}
+
+.hero-name-letter {
+  display: inline-block;
+  font-family: var(--font-display, 'Cinzel', serif);
+  font-size: clamp(3.2rem, 12vw, 9rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  background: linear-gradient(
+    160deg,
+    #FFFDE7 0%,
+    #F5D76E 20%,
+    #D4AF37 45%,
+    #C9A227 55%,
+    #F3E5AB 70%,
+    #D4AF37 85%,
+    #8B6914 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.55))
+          drop-shadow(0 2px 40px rgba(212, 175, 55, 0.25));
+  text-shadow: none;
+  transform-style: preserve-3d;
+  /* Shimmering sweep animation */
+  background-size: 200% 200%;
+  animation: letter-shimmer 4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.15s);
+}
+
+/* Each letter gets its own shimmer phase */
+.hero-name-letter:nth-child(1) { animation-delay: 0s; }
+.hero-name-letter:nth-child(2) { animation-delay: 0.15s; }
+.hero-name-letter:nth-child(3) { animation-delay: 0.3s; }
+.hero-name-letter:nth-child(4) { animation-delay: 0.45s; }
+.hero-name-letter:nth-child(5) { animation-delay: 0.6s; }
+.hero-name-letter:nth-child(6) { animation-delay: 0.75s; }
+
+@keyframes letter-shimmer {
+  0%, 100% { background-position: 0% 50%;   filter: drop-shadow(0 0 18px rgba(212,175,55,0.55)) drop-shadow(0 2px 40px rgba(212,175,55,0.25)); }
+  50%       { background-position: 100% 50%; filter: drop-shadow(0 0 30px rgba(245,215,110,0.85)) drop-shadow(0 4px 50px rgba(212,175,55,0.45)); }
+}
+
+/* Underline ornament below the name */
+.hero-name-wrap::after {
+  content: '';
+  display: block;
+  width: clamp(120px, 40vw, 320px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-mid) 30%, var(--gold-light) 50%, var(--gold-mid) 70%, transparent 100%);
+  opacity: 0.6;
+  margin-top: 0.2rem;
+}
+
+.hero-name-sub {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-script, 'Cormorant Garamond', serif);
+  font-style: italic;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--gold-light);
+  letter-spacing: 0.12em;
+  opacity: 0.85;
+  margin-top: 0.1rem;
+}
+
+/* ── Main heading ─────────────────── */
+.hero-heading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 4.5vw, 2.8rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-white);
+  letter-spacing: 0.02em;
+}
+
+.hero-heading--birthday {
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--gold-light) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 30px rgba(212,175,55,0.35));
+}
+
+.heart-accent {
+  -webkit-text-fill-color: #FF6B8A;
+  filter: none;
+}
+
+.hero-sub {
+  font-family: var(--font-script);
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  color: var(--gold-light);
+  opacity: 0.9;
+}
+
+/* ── Cake ─────────────────────────── */
+.hero-cake {
+  margin: 0.25rem 0;
+}
+
+/* ── Birthday celebration text ────── */
+.hero-birthday-text {
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+  font-style: italic;
+  color: var(--gold-light);
+  letter-spacing: 0.15em;
+  opacity: 0.75;
+}
+
+/* ── Scroll hint ──────────────────── */
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.5rem;
+  opacity: 0.4;
+  animation: scroll-bob 2s ease-in-out infinite;
+}
+
+.scroll-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-mid);
+}
+
+.scroll-chevron {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-right: 1.5px solid var(--gold-mid);
+  border-bottom: 1.5px solid var(--gold-mid);
+  transform: rotate(45deg);
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50%       { transform: translateY(6px); opacity: 0.6; }
+}

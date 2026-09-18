@@ -1,0 +1,38 @@
+.section-nav {
+  position: fixed;
+  right: clamp(12px, 3vw, 24px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-dot {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212,175,55,0.35);
+  background: transparent;
+  transition: all 0.35s ease;
+}
+
+.nav-dot:hover {
+  border-color: var(--gold-light);
+  background: rgba(212,175,55,0.15);
+}
+
+.nav-dot.active {
+  background: var(--gold-mid);
+  border-color: var(--gold-light);
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+  transform: scale(1.3);
+}
+
+@media (max-width: 480px) {
+  .section-nav {
+    display: none;
+  }
+}

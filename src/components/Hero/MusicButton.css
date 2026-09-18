@@ -1,0 +1,96 @@
+.music-btn-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.music-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border: 1.5px solid var(--gold-mid);
+  border-radius: 40px;
+  background: rgba(212, 175, 55, 0.05);
+  color: var(--gold-light);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.music-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.music-btn:hover::before,
+.music-btn.playing::before { opacity: 1; }
+
+.music-btn:hover {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 20px rgba(212,175,55,0.2),
+              0 0 60px rgba(212,175,55,0.08);
+  transform: translateY(-1px);
+}
+
+.music-btn.playing {
+  border-color: var(--gold-light);
+  box-shadow: 0 0 25px rgba(212,175,55,0.25),
+              0 0 80px rgba(212,175,55,0.1);
+}
+
+.music-icon {
+  font-size: 1.1rem;
+  animation: none;
+}
+.music-btn.playing .music-icon {
+  animation: icon-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes icon-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+.music-label {
+  white-space: nowrap;
+}
+
+/* ── Equalizer bars ─────────────────────── */
+.eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.eq-bar {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--gold-light);
+  transform-origin: bottom;
+  animation: eq-dance 0.8s ease-in-out infinite;
+}
+
+.eq-bar-1 { animation-delay: 0s;    height: 60%; }
+.eq-bar-2 { animation-delay: 0.15s; height: 90%; }
+.eq-bar-3 { animation-delay: 0.05s; height: 50%; }
+.eq-bar-4 { animation-delay: 0.25s; height: 80%; }
+.eq-bar-5 { animation-delay: 0.1s;  height: 40%; }
+
+@keyframes eq-dance {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.25); }
+}

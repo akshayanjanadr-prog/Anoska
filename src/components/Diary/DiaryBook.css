@@ -1,0 +1,355 @@
+/* ═══════════════════════════════════════════
+   DIARY BOOK — luxury physical diary look
+═══════════════════════════════════════════ */
+.diary-book-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* ── Book body ──────────────────────────── */
+.book-body {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  min-height: clamp(520px, 80vw, 720px);
+  border-radius: 4px 12px 12px 4px;
+  box-shadow:
+    -6px 6px 30px rgba(0,0,0,0.8),
+    0 0 0 1px rgba(212,175,55,0.12),
+    6px 0 20px rgba(212,175,55,0.05);
+  overflow: hidden;
+}
+
+/* ── Book spine ──────────────────────── */
+.book-spine {
+  position: absolute;
+  left: calc(50% - 14px);
+  top: 0;
+  bottom: 0;
+  width: 28px;
+  background: linear-gradient(
+    90deg,
+    #1a1408 0%,
+    #2a2010 30%,
+    #3a2c16 50%,
+    #2a2010 70%,
+    #1a1408 100%
+  );
+  border-left:  1px solid rgba(212,175,55,0.3);
+  border-right: 1px solid rgba(212,175,55,0.3);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Left decorative page ─────────────── */
+.book-left-page {
+  flex: 1;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.04) 0%, transparent 60%),
+    linear-gradient(160deg, #1c1508 0%, #140f05 100%);
+  border-right: 1px solid rgba(212,175,55,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  /* Paper texture */
+  background-image:
+    radial-gradient(ellipse at 30% 50%, rgba(212,175,55,0.04) 0%, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(212,175,55,0.025) 28px,
+      rgba(212,175,55,0.025) 29px
+    ),
+    linear-gradient(160deg, #1c1508 0%, #140f05 100%);
+}
+
+.left-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.left-ornament {
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.6;
+  animation: ornament-glow 3s ease-in-out infinite;
+}
+
+@keyframes ornament-glow {
+  0%, 100% { opacity: 0.6; text-shadow: 0 0 0px rgba(212,175,55,0); }
+  50%       { opacity: 1;   text-shadow: 0 0 15px rgba(212,175,55,0.6); }
+}
+
+.left-title {
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+.left-subtitle {
+  font-family: var(--font-script);
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.left-divider {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+}
+
+.left-num {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: rgba(212,175,55,0.15);
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── Right photo page ──────────────────── */
+.book-right-page {
+  flex: 1.15;
+  background: linear-gradient(160deg, #0e0b04 0%, #080601 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-motion-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Diary page inner ─────────────────── */
+.diary-page-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(14px, 3vw, 24px);
+  gap: 12px;
+}
+
+/* ── Photo frame ─────────────────────── */
+.diary-photo-frame {
+  position: relative;
+  flex: 1;
+  border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #0a0800;
+}
+
+.diary-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: block;
+}
+
+.diary-photo.loaded {
+  opacity: 1;
+}
+
+.diary-img-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(212,175,55,0.03) 0%,
+    rgba(212,175,55,0.08) 50%,
+    rgba(212,175,55,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ── Corner decorations ──────────────── */
+.corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--gold-mid);
+  border-style: solid;
+  opacity: 0.7;
+}
+.corner.tl { top: 6px;    left: 6px;    border-width: 2px 0 0 2px; }
+.corner.tr { top: 6px;    right: 6px;   border-width: 2px 2px 0 0; }
+.corner.bl { bottom: 6px; left: 6px;    border-width: 0 0 2px 2px; }
+.corner.br { bottom: 6px; right: 6px;   border-width: 0 2px 2px 0; }
+
+/* ── Placeholder ─────────────────────── */
+.diary-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: linear-gradient(160deg, #1a1508 0%, #0e0c04 100%);
+}
+
+.placeholder-icon {
+  font-size: 2rem;
+  color: var(--gold-mid);
+  opacity: 0.4;
+  animation: ornament-glow 2s ease-in-out infinite;
+}
+
+.placeholder-text {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ── Caption ─────────────────────────── */
+.diary-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  gap: 8px;
+}
+
+.caption-text {
+  font-family: var(--font-script);
+  font-size: clamp(0.7rem, 2vw, 0.9rem);
+  color: var(--text-muted);
+  font-style: italic;
+  flex: 1;
+  line-height: 1.4;
+}
+
+.caption-page {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+/* ── Controls ───────────────────────── */
+.diary-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.diary-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212,175,55,0.3);
+  background: rgba(212,175,55,0.04);
+  color: var(--gold-light);
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.diary-btn:hover:not(:disabled) {
+  border-color: var(--gold-light);
+  background: rgba(212,175,55,0.1);
+  box-shadow: 0 0 15px rgba(212,175,55,0.2);
+}
+
+.diary-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* ── Dot indicators ──────────────────── */
+.diary-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 200px;
+}
+
+.diary-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(212,175,55,0.2);
+  border: 1px solid rgba(212,175,55,0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.diary-dot.active {
+  background: var(--gold);
+  border-color: var(--gold-light);
+  box-shadow: 0 0 8px rgba(212,175,55,0.5);
+  transform: scale(1.3);
+}
+
+/* ── Responsive: mobile ─────────────── */
+@media (max-width: 600px) {
+  .book-body {
+    max-width: 100%;
+    min-height: clamp(460px, 130vw, 620px);
+  }
+
+  /* Hide left decorative page on very small screens */
+  .book-left-page {
+    display: none;
+  }
+
+  .book-spine { display: none; }
+
+  .book-right-page {
+    border-radius: 6px;
+  }
+
+  .book-body {
+    border-radius: 8px;
+  }
+
+  .diary-btn {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .book-body {
+    min-height: clamp(480px, 70vw, 640px);
+  }
+  .left-title { font-size: 0.95rem; }
+  .left-subtitle { font-size: 0.8rem; }
+}
